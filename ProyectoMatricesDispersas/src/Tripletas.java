@@ -44,6 +44,7 @@ public class Tripletas {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     public int[][] getTripleta() {
@@ -135,71 +136,81 @@ public class Tripletas {
         tripleta = nuevo.tripleta;
     }
 
-    
     public void Eliminar() {
-        System.out.println("ingrese 1, 2 o 3 si quieres eliminar por dato, posicion o posicion y dato respectivamente");
-        int opc = Basura.nextInt();
-        boolean bandera = false;
-        switch (opc) {
-            case 1:
-                System.out.println("ingrese el dato a eliminar");
-                int dato = Basura.nextInt();
-                for (int i = 1; i < tripleta.length; i++) {
-                    if (tripleta[i][2] == dato) {
-                        bandera = true;
-                        for(int j = i;j+1<tripleta.length;j++){
-                            tripleta[j][0] = tripleta[j+1][0];
-                            tripleta[j][1] = tripleta[j+1][1];
-                            tripleta[j][2] = tripleta[j+1][2];
+        boolean bandera;
+        int opc;
+        do {
+            System.out.println(
+                    "ingrese 1, 2 o 3 si quieres eliminar por dato, posicion o posicion y dato respectivamente");
+            opc = Basura.nextInt();
+            bandera = false;
+            switch (opc) {
+                case 1:
+                    System.out.println("ingrese el dato a eliminar");
+                    int dato = Basura.nextInt();
+                    for (int i = 1; i < tripleta.length; i++) {
+                        if (tripleta[i][2] == dato) {
+                            bandera = true;
+                            for (int j = i; j + 1 < tripleta.length; j++) {
+                                tripleta[j][0] = tripleta[j + 1][0];
+                                tripleta[j][1] = tripleta[j + 1][1];
+                                tripleta[j][2] = tripleta[j + 1][2];
+                            }
+                            tripleta[0][2]--;
                         }
-                        tripleta[0][2]--;
                     }
-                }
-                break;
-            case 2:
-                System.out.println("ingrese primero las filas, y luego las columnas, ejemplo: (1,2) uno es las filas y dos las columnas");
-                String cadena = Basura.next();
-                String[] componentes = cadena.split(",");
-                if(Integer.parseInt(componentes[0]) < tripleta[0][0] && Integer.parseInt(componentes[1]) < tripleta[0][1]){
-                   for (int i = 1; i < tripleta.length; i++) {
-                        if(Integer.parseInt(componentes[0]) == tripleta[i][0] && Integer.parseInt(componentes[1]) == tripleta[i][1]){
-                            bandera = true;
-                            for(int j = i;j+1<tripleta.length;j++){
-                            tripleta[j][0] = tripleta[j+1][0];
-                            tripleta[j][1] = tripleta[j+1][1];
-                            tripleta[j][2] = tripleta[j+1][2];
+                    break;
+                case 2:
+                    System.out.println(
+                            "ingrese primero las filas, y luego las columnas, ejemplo: (1,2) uno es las filas y dos las columnas");
+                    String cadena = Basura.next();
+                    String[] componentes = cadena.split(",");
+                    if (Integer.parseInt(componentes[0]) < tripleta[0][0]
+                            && Integer.parseInt(componentes[1]) < tripleta[0][1]) {
+                        for (int i = 1; i < tripleta.length; i++) {
+                            if (Integer.parseInt(componentes[0]) == tripleta[i][0]
+                                    && Integer.parseInt(componentes[1]) == tripleta[i][1]) {
+                                bandera = true;
+                                for (int j = i; j + 1 < tripleta.length; j++) {
+                                    tripleta[j][0] = tripleta[j + 1][0];
+                                    tripleta[j][1] = tripleta[j + 1][1];
+                                    tripleta[j][2] = tripleta[j + 1][2];
+                                }
+                                tripleta[0][2]--;
+                                i = tripleta.length;
                             }
-                            tripleta[0][2]--;
-                            i = tripleta.length;
                         }
-                   }
-                }
-                
-                break;
-            case 3:
-                System.out.println("ingrese primero las filas, luego las columnas, y por ultimo el dato, ejemplo: (1,2,3) uno es las filas, dos las columnas y 3 el dato");
-                 cadena = Basura.next();
-                String[] comp = cadena.split(",");
-                if(Integer.parseInt(comp[0]) < tripleta[0][0] && Integer.parseInt(comp[1]) < tripleta[0][1]){
-                   for (int i = 1; i < tripleta.length; i++) {
-                        if(Integer.parseInt(comp[0]) == tripleta[i][0] && Integer.parseInt(comp[1]) == tripleta[i][1]&& Integer.parseInt(comp[2]) == tripleta[i][2]){
-                            bandera = true;
-                            for(int j = i;j+1<tripleta.length;j++){
-                            tripleta[j][0] = tripleta[j+1][0];
-                            tripleta[j][1] = tripleta[j+1][1];
-                            tripleta[j][2] = tripleta[j+1][2];
+                    }
+
+                    break;
+                case 3:
+                    System.out.println(
+                            "ingrese primero las filas, luego las columnas, y por ultimo el dato, ejemplo: (1,2,3) uno es las filas, dos las columnas y 3 el dato");
+                    cadena = Basura.next();
+                    String[] comp = cadena.split(",");
+                    if (Integer.parseInt(comp[0]) < tripleta[0][0] && Integer.parseInt(comp[1]) < tripleta[0][1]) {
+                        for (int i = 1; i < tripleta.length; i++) {
+                            if (Integer.parseInt(comp[0]) == tripleta[i][0]
+                                    && Integer.parseInt(comp[1]) == tripleta[i][1]
+                                    && Integer.parseInt(comp[2]) == tripleta[i][2]) {
+                                bandera = true;
+                                for (int j = i; j + 1 < tripleta.length; j++) {
+                                    tripleta[j][0] = tripleta[j + 1][0];
+                                    tripleta[j][1] = tripleta[j + 1][1];
+                                    tripleta[j][2] = tripleta[j + 1][2];
+                                }
+                                tripleta[0][2]--;
+                                i = tripleta.length;
                             }
-                            tripleta[0][2]--;
-                            i = tripleta.length;
                         }
-                   }
-                }
-                
-                
-                break;
-            default:    System.out.println("Opcion incorrecta");
-                break;
-        }
+                    }
+
+                    break;
+                default:
+                    System.out.println("Opcion incorrecta");
+                    break;
+            }
+        } while (opc != 1 && opc != 2 && opc != 3);
         if (bandera) {
             System.out.println("El dato se a eliminado exitosamente");
         } else {
@@ -208,4 +219,96 @@ public class Tripletas {
         Redimensionar();
     }
 
+    public void SumarF() {
+        for (int i = 0; i < tripleta[0][0]; i++) {
+            int f = 0;
+            for (int j = 1; j < tripleta.length; j++) {
+                if (tripleta[j][0] == i) {
+                    f += tripleta[j][2];
+                }
+            }
+            System.out.println("La suma de la fila " + i + " es: " + f);
+        }
+    }
+
+    public void SumarC() {
+        for (int i = 0; i < tripleta[0][1]; i++) {
+            int f = 0;
+            for (int j = 1; j < tripleta.length; j++) {
+                if (tripleta[j][1] == i) {
+                    f += tripleta[j][2];
+                }
+            }
+            System.out.println("La suma de la columna " + i + " es: " + f);
+        }
+    }
+
+    public void Insertar() {
+        System.out.println(
+                "ingrese primero las filas, luego las columnas, y por ultimo el dato, ejemplo: (1,2,3) uno es las filas, dos las columnas y 3 el dato");
+        String cadena = Basura.next();
+        String[] comp = cadena.split(",");
+        int dato = Integer.parseInt(comp[2]);
+        int c = Integer.parseInt(comp[1]);
+        int f = Integer.parseInt(comp[0]);
+        if (f < tripleta[0][0] && c < tripleta[0][1]) {
+            boolean bandera = false;
+            for (int i = 1; i < tripleta.length && !bandera; i++) {
+                if (tripleta[i][0] == f && tripleta[i][1] == c) {
+                    bandera = true;
+                    System.out.println(
+                            "Se encontro un valor en esa posicion, ingrese 1 para reemplazarlo, o 2 para sumarlos");
+                    int valor;
+                    do {
+                        valor = Basura.nextInt();
+                        switch (valor) {
+                            case 1:
+                                tripleta[i][2] = dato;
+                                break;
+                            case 2:
+                                tripleta[i][2] += dato;
+                                break;
+                            default:
+                                System.out.println("No seas idiota, coloca un 1 o 2, usuario de mierda");
+                                break;
+                        }
+                    } while (valor != 1 && valor != 2);
+                }
+            }
+            if (!bandera) {
+                Tripletas nueva = new Tripletas();
+                nueva.tripleta = new int[tripleta.length + 1][3];
+                int aux = 0;
+                for (int i = 0; i < tripleta.length; i++) {
+                    nueva.tripleta[i + aux][0] = tripleta[i][0];
+                    nueva.tripleta[i + aux][1] = tripleta[i][1];
+                    nueva.tripleta[i + aux][2] = tripleta[i][2];
+                    if (i > 0) {
+                        if ((tripleta[i][0] == f && tripleta[i][1] > c || tripleta[i][0] > f) && !bandera) {
+                            aux++;
+                            bandera = !bandera;
+                            nueva.tripleta[i + aux][0] = tripleta[i][0];
+                            nueva.tripleta[i + aux][1] = tripleta[i][1];
+                            nueva.tripleta[i + aux][2] = tripleta[i][2];
+                            nueva.tripleta[i][0] = f;
+                            nueva.tripleta[i][1] = c;
+                            nueva.tripleta[i][2] = dato;
+                        }
+                    }
+                }
+                if (!bandera) {
+                    nueva.tripleta[nueva.tripleta.length - 1][0] = f;
+                    nueva.tripleta[nueva.tripleta.length - 1][1] = c;
+                    nueva.tripleta[nueva.tripleta.length - 1][2] = dato;
+                }
+                nueva.tripleta[0][2]++;
+                tripleta = nueva.tripleta;
+            }
+        } else {
+            System.out.println(
+                    "La matriz no es lo suficientemente grande para insertar ese dato");
+        }
+    }
+
+    public void Multiplicar(Tripletas b){}
 }
