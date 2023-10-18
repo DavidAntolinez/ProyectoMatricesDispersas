@@ -245,12 +245,96 @@ public class Forma1 {
 
     }
 
-    public void Multiplicar(Forma1 b){}
+    public void SumarF() {
+        Nodo p = Punta.getLiga(), q;
+        int i = 0, f;
+        while (p != Punta) {
+            q = p.getLf();
+            f = 0;
+            while (q != p) {
+                f += q.getDato();
+                q = q.getLf();
+            }
+            System.out.println("La suma de la fila " + i + " es: " + f);
+            i++;
+            p = p.getLiga();
+        }
+    }
 
-    public void SumarF(){}
+    public void SumarC() {
+        Nodo p = Punta.getLiga(), q;
+        int i = 0, f;
+        while (p != Punta) {
+            q = p.getLc();
+            f = 0;
+            while (q != p) {
+                f += q.getDato();
+                q = q.getLc();
+            }
+            System.out.println("La suma de la columna " + i + " es: " + f);
+            i++;
+            p = p.getLiga();
+        }
+    }
 
-    public void SumarC(){}
+    public void Sumar(Forma1 b) {
+        Nodo p = Punta.getLiga(), q, ñ = b.Punta.getLiga(), a;
+        int cont = 0;
+        Forma1 nueva = new Forma1(new int[Punta.getF()][Punta.getC()]);
+        Nodo z = nueva.Punta.getLiga(), m, x;
+        while (p != Punta || ñ != b.Punta) {
+            q = p.getLf();
+            a = ñ.getLf();
+            m = z.getLf();
+            while (q != p || a != ñ) {
+                if (q != p && a != ñ) {
+                    if (q.getC() == a.getC()) {
+                        if (q.getDato() + a.getDato() != 0) {
+                            x = new Nodo(q.getF(), q.getC(), q.getDato() + a.getDato());
+                            m.setLf(x);
+                            m = x;
+                            x.setLf(z);
+                        }
+                        q = q.getLf();
+                        a = a.getLf();
+                    } else if (q.getC() < a.getC()) {
+                        x = new Nodo(q.getF(), q.getC(), q.getDato());
+                        q = q.getLf();
+                        m.setLf(x);
+                        m = x;
+                        x.setLf(z);
+                    } else {
+                        x = new Nodo(a.getF(), a.getC(), a.getDato());
+                        a = a.getLf();
+                        m.setLf(x);
+                        m = x;
+                        x.setLf(z);
+                    }
+                } else {
+                    if (q != p) {
+                        x = new Nodo(q.getF(), q.getC(), q.getDato());
+                        q = q.getLf();
+                        m.setLf(x);
+                        m = x;
+                        x.setLf(z);
+                    } else {
+                        x = new Nodo(a.getF(), a.getC(), a.getDato());
+                        a = a.getLf();
+                        m.setLf(x);
+                        m = x;
+                        x.setLf(z);
+                    }
+                }
+            }
+            p = p.getLiga();
+            ñ = ñ.getLiga();
+            z = z.getLiga();
+        }
+        nueva.Paso3();
+        Punta = nueva.Punta;
+    }
 
-    public void Sumar(Forma1 b){}
+    public void Multiplicar(Forma1 b) {
 
+    }
 }

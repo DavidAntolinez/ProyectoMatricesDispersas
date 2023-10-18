@@ -310,5 +310,6 @@ public class Tripletas {
         }
     }
 
-    public void Multiplicar(Tripletas b){}
+    public void Multiplicar(Tripletas b) {
+    }
 }

@@ -49,15 +49,21 @@ public class Forma2 {
         System.out.println(cadena);
     }
 
-    public void Multiplicar(Forma2 b){}
+    public void Multiplicar(Forma2 b) {
+    }
 
-    public void SumarF(){}
+    public void SumarF() {
+    }
 
-    public void SumarC(){}
+    public void SumarC() {
+    }
 
-    public void Insertar(){}
+    public void Insertar() {
+    }
 
-    public void Eliminar(){}
+    public void Eliminar() {
+    }
 
-    public void Sumar(Forma2 b){}
+    public void Sumar(Forma2 b) {
+    }
 }

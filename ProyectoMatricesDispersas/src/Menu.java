@@ -9,10 +9,10 @@ public class Menu {
 
     public int[][] Matriz(int f, int c) {
         Random aleatorio = new Random();
-        if(f == 0){
+        if (f == 0) {
             f = aleatorio.nextInt(5) + 1;
         }
-        if(c == 0){
+        if (c == 0) {
             c = aleatorio.nextInt(5) + 1;
         }
         int[][] matriz = new int[f][c];
@@ -142,10 +142,10 @@ public class Menu {
                             T.Multiplicar(new Tripletas(MenuCreacionMatriz(T.getTripleta()[0][1], 0)));
                             break;
                         case 2:
-                            F1.Multiplicar(new Forma1(MenuCreacionMatriz(F1.getPunta().getC(),0)));
+                            F1.Multiplicar(new Forma1(MenuCreacionMatriz(F1.getPunta().getC(), 0)));
                             break;
                         case 3:
-                            F2.Multiplicar(new Forma2(MenuCreacionMatriz(F2.getPunta().getC(),0)));
+                            F2.Multiplicar(new Forma2(MenuCreacionMatriz(F2.getPunta().getC(), 0)));
                             break;
                         default:
                             break;
@@ -162,7 +162,7 @@ public class Menu {
                     break;
             }
 
-        } while (opc != 0 );
+        } while (opc != 0);
     }
 
     public int[][] MenuCreacionMatriz(int f, int c) {
@@ -170,7 +170,7 @@ public class Menu {
         int[][] matriz;
         System.out.println("Se a generado esta matriz aleatoriamente");
         do {
-            matriz = Matriz(f,c);
+            matriz = Matriz(f, c);
             System.out.println(MostrarMatriz(matriz));
             System.out.println("Escribe 1 si la quieres usar, o cualquier otro numero si quieres generar otra");
             opc = escaner.nextInt();
@@ -180,7 +180,7 @@ public class Menu {
 
     public void MenuCreacion() {
         int opc;
-        int[][] matriz = MenuCreacionMatriz(0,0);
+        int[][] matriz = MenuCreacionMatriz(0, 0);
         do {
             System.out.println(
                     "Escriba 1, si quieres convertir la matriz en Tripletas, 2 para forma 1, y 3 para forma 2");
@@ -205,7 +205,7 @@ public class Menu {
         return cadena;
     }
 
-    public void OperacionEspecial(){
+    public void OperacionEspecial() {
 
     }
 
