@@ -311,5 +311,27 @@ public class Tripletas {
     }
 
     public void Multiplicar(Tripletas b) {
+        Tripletas nueva = new Tripletas();
+        nueva.tripleta = new int[tripleta[0][0] * b.tripleta[0][1]][3];
+        nueva.tripleta[0][0] = tripleta[0][0];
+        nueva.tripleta[0][1] = b.tripleta[0][1];
+        int cont = 1;
+        for (int i = 0; i < tripleta[0][0]; i++) {
+            for (int j = 0; j < b.tripleta[0][1]; j++) {
+                int k = 1;
+                for (int j2 = 1; j2 < tripleta.length && (tripleta[j2][0] <= i || k < b.tripleta.length); j2++) {
+                    if (tripleta[j2][0] <= i && b.tripleta[k][1] == j) {
+                        if (tripleta[j2][2] * b.tripleta[k][2] != 0) {
+                            nueva.tripleta[cont][0] = tripleta[j2][0];
+                            nueva.tripleta[cont][1] = b.tripleta[k][1];
+                            nueva.tripleta[cont][2] += tripleta[j2][2] * b.tripleta[k][2];
+                            cont++;
+                        }
+                    }
+                }
+            }
+        }
+        nueva.Redimensionar();
+        this.tripleta = nueva.tripleta;
     }
 }

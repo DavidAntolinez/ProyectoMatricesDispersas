@@ -214,33 +214,60 @@ public class Forma1 {
         int c = Integer.parseInt(comp[1]);
         int f = Integer.parseInt(comp[0]);
         boolean bandera = false;
-        Nodo p = Punta.getLiga();
-        while (p != Punta && !bandera) {
-            Nodo q = p.getLf();
-            while (q != p && !bandera) {
-                if (q.getF() == f && q.getC() == c) {
-                    bandera = true;
-                    System.out.println(
-                            "Se encontro un valor en esa posicion, ingrese 1 para reemplazarlo, o 2 para sumarlos");
-                    int valor;
-                    do {
-                        valor = Basura.nextInt();
-                        switch (valor) {
-                            case 1:
-                                q.setDato(dato);
-                                break;
-                            case 2:
-                                q.setDato(q.getDato() + dato);
-                                break;
-                            default:
-                                System.out.println("No seas idiota, coloca un 1 o 2, usuario de mierda");
-                                break;
-                        }
-                    } while (valor != 1 && valor != 2);
+        if (f < Punta.getF() && c < Punta.getF()) {
+            Nodo p = Punta.getLiga();
+            while (p != Punta && !bandera) {
+                Nodo q = p.getLf();
+                while (q != p && !bandera) {
+                    if (q.getF() == f && q.getC() == c) {
+                        bandera = true;
+                        System.out.println(
+                                "Se encontro un valor en esa posicion, ingrese 1 para reemplazarlo, o 2 para sumarlos");
+                        int valor;
+                        do {
+                            valor = Basura.nextInt();
+                            switch (valor) {
+                                case 1:
+                                    q.setDato(dato);
+                                    break;
+                                case 2:
+                                    q.setDato(q.getDato() + dato);
+                                    break;
+                                default:
+                                    System.out.println("No seas idiota, coloca un 1 o 2, usuario de mierda");
+                                    break;
+                            }
+                        } while (valor != 1 && valor != 2);
+                    }
+                    q = q.getLf();
                 }
-                q = q.getLf();
+                p = p.getLiga();
             }
-            p = p.getLiga();
+
+            if (!bandera) {
+                p = Punta.getLiga();
+                Nodo ñ = Punta.getLiga();
+                while (!bandera && (p.getF() != f || ñ.getC() != c)) {
+                    if (p.getF() != f) {
+                        p = p.getLiga();
+                    }
+                    if (ñ.getC() != c) {
+                        ñ = ñ.getLiga();
+                    }
+                }
+                Nodo q = p.getLf(), a = ñ.getLc();
+                while (!bandera && q != p && q.getLf().getC() < c) {
+                    q = q.getLf();
+                }
+                while (a != ñ && a.getLc().getF() < f) {
+                    a = a.getLc();
+                }
+                Nodo x = new Nodo(f, c, dato);
+                x.setLf(q.getLf());
+                x.setLc(a.getLc());
+                q.setLf(x);
+                a.setLc(x);
+            }
         }
 
     }
