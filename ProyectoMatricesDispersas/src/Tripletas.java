@@ -312,26 +312,34 @@ public class Tripletas {
 
     public void Multiplicar(Tripletas b) {
         Tripletas nueva = new Tripletas();
-        nueva.tripleta = new int[tripleta[0][0] * b.tripleta[0][1]][3];
+        nueva.tripleta = new int[(tripleta[0][0]*b.tripleta[0][1])+1][3];
         nueva.tripleta[0][0] = tripleta[0][0];
         nueva.tripleta[0][1] = b.tripleta[0][1];
-        int cont = 1;
+        int k = 0;
         for (int i = 0; i < tripleta[0][0]; i++) {
-            for (int j = 0; j < b.tripleta[0][1]; j++) {
-                int k = 1;
-                for (int j2 = 1; j2 < tripleta.length && (tripleta[j2][0] <= i || k < b.tripleta.length); j2++) {
-                    if (tripleta[j2][0] <= i && b.tripleta[k][1] == j) {
-                        if (tripleta[j2][2] * b.tripleta[k][2] != 0) {
-                            nueva.tripleta[cont][0] = tripleta[j2][0];
-                            nueva.tripleta[cont][1] = b.tripleta[k][1];
-                            nueva.tripleta[cont][2] += tripleta[j2][2] * b.tripleta[k][2];
-                            cont++;
-                        }
-                    }
+            for (int j = 0; j < tripleta[0][1]; j++) {
+                nueva.tripleta[k+1][2] = fMasc(tripleta, b.tripleta, i, j);
+                if(nueva.tripleta[k+1][2] != 0){
+                    nueva.tripleta[k+1][0] = i;
+                    nueva.tripleta[k+1][1] = j;
+                    k++;
                 }
             }
         }
+        nueva.tripleta[0][2] = k;
         nueva.Redimensionar();
-        this.tripleta = nueva.tripleta;
+        tripleta = nueva.tripleta;
+    }
+
+    private int fMasc(int[][] a,int[][] b,int f,int c){
+        int sum = 0;
+        for (int i = 1;i < a.length; i++) {
+            for (int j = 1; a[i][0] == f && j < b.length; j++) {
+                if(a[i][1] == b[j][0] && b[j][1] == c){
+                    sum += a[i][2]*b[j][2];
+                }
+            }
+        }
+        return sum;
     }
 }
