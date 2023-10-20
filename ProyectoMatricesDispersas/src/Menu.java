@@ -209,9 +209,9 @@ public class Menu {
         int[][] mtri = Matriz(0, 0);
         int[][] mf2 = Matriz(mtri[0].length, 0);
         System.out.println(MostrarMatriz(mtri));
-        System.out.println("X");
+        System.out.println("X\n");
         System.out.println(MostrarMatriz(mf2));
-        System.out.println("=");
+        System.out.println("=\n");
         Tripletas tripleta = new Tripletas(mtri);
         Forma2 f2 = new Forma2(mf2);
         Forma1 f1 = new Forma1(new int[tripleta.getTripleta()[0][0]][f2.getPunta().getC()]);
