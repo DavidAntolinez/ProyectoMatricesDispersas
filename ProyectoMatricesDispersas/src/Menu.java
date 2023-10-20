@@ -206,7 +206,41 @@ public class Menu {
     }
 
     public void OperacionEspecial() {
+        int[][] mtri = Matriz(0, 0);
+        int[][] mf2 = Matriz(mtri[0].length, 0);
+        System.out.println(MostrarMatriz(mtri));
+        System.out.println("X");
+        System.out.println(MostrarMatriz(mf2));
+        System.out.println("=");
+        Tripletas tripleta = new Tripletas(mtri);
+        Forma2 f2 = new Forma2(mf2);
+        Forma1 f1 = new Forma1(new int[tripleta.getTripleta()[0][0]][f2.getPunta().getC()]);
+        int sum =0;
+        for (int i = 0; i < tripleta.getTripleta()[0][0]; i++) {
+            int j = 0;
+            while (j < f2.getPunta().getC()) {
+                sum = fMasc(tripleta.getTripleta(), f2.getPunta(), i, j);
+                if (sum != 0) {
+                    f1.Insertar(i + "," + j + "," + sum);
+                }
+                j++;
+            }
+        }
+        f1.Mostrar();
+    }
 
+    private int fMasc(int[][] a, Nodo b, int f, int c){
+        int sum = 0;
+        for (int i = 1;i < a.length; i++) {
+            Nodo p = b.getLc();
+            while (a[i][0] == f && p.getC() <= c && p != b) {
+                if(a[i][1] == p.getF() && p.getC() == c){
+                    sum += a[i][2]*p.getDato();
+                }
+                p = p.getLc();
+            }
+        }
+        return sum;
     }
 
 }
