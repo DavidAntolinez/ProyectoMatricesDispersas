@@ -317,7 +317,7 @@ public class Tripletas {
         nueva.tripleta[0][1] = b.tripleta[0][1];
         int k = 0;
         for (int i = 0; i < tripleta[0][0]; i++) {
-            for (int j = 0; j < tripleta[0][1]; j++) {
+            for (int j = 0; j < b.tripleta[0][1]; j++) {
                 nueva.tripleta[k+1][2] = fMasc(tripleta, b.tripleta, i, j);
                 if(nueva.tripleta[k+1][2] != 0){
                     nueva.tripleta[k+1][0] = i;

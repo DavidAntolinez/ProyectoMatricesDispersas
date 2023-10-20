@@ -204,11 +204,13 @@ public class Forma1 {
         }
     }
 
-    public void Insertar() {
-        System.out.println(
-                "ingrese primero las filas, luego las columnas, y por ultimo el dato, ejemplo: (1,2,3) uno es las filas, dos las columnas y 3 el dato");
+    public void Insertar(String cadena) {
         Scanner Basura = new Scanner(System.in);
-        String cadena = Basura.next();
+        if (cadena.isEmpty()) {
+            System.out.println(
+                    "ingrese primero las filas, luego las columnas, y por ultimo el dato, ejemplo: (1,2,3) uno es las filas, dos las columnas y 3 el dato");
+            cadena = Basura.next();
+        }
         String[] comp = cadena.split(",");
         int dato = Integer.parseInt(comp[2]);
         int c = Integer.parseInt(comp[1]);
@@ -247,7 +249,7 @@ public class Forma1 {
             if (!bandera) {
                 p = Punta.getLiga();
                 Nodo ñ = Punta.getLiga();
-                while (!bandera && (p.getF() != f || ñ.getC() != c)) {
+                while ((p.getF() != f || ñ.getC() != c)) {
                     if (p.getF() != f) {
                         p = p.getLiga();
                     }
@@ -255,19 +257,25 @@ public class Forma1 {
                         ñ = ñ.getLiga();
                     }
                 }
-                Nodo q = p.getLf(), a = ñ.getLc();
-                while (!bandera && q != p && q.getLf().getC() < c) {
-                    q = q.getLf();
-                }
-                while (a != ñ && a.getLc().getF() < f) {
-                    a = a.getLc();
-                }
+                Nodo q = p, a = ñ.getLc();
+                do {
+                    if(q.getLf().getC() < c){
+                        q = q.getLf();
+                    }
+                } while (q.getLf() != p && q.getLf().getC() < c);
+                do {
+                    if(a.getLc().getF() < f){
+                        a = a.getLc();
+                    }
+                } while (a.getLc() != ñ && a.getLc().getF() < f);
                 Nodo x = new Nodo(f, c, dato);
                 x.setLf(q.getLf());
-                x.setLc(a.getLc());
                 q.setLf(x);
+                x.setLc(a.getLc());
                 a.setLc(x);
             }
+        }else{
+            System.out.println("No existe la posicion del dato a insertar en la matriz");
         }
 
     }
@@ -306,7 +314,6 @@ public class Forma1 {
 
     public void Sumar(Forma1 b) {
         Nodo p = Punta.getLiga(), q, ñ = b.Punta.getLiga(), a;
-        int cont = 0;
         Forma1 nueva = new Forma1(new int[Punta.getF()][Punta.getC()]);
         Nodo z = nueva.Punta.getLiga(), m, x;
         while (p != Punta || ñ != b.Punta) {
@@ -362,6 +369,44 @@ public class Forma1 {
     }
 
     public void Multiplicar(Forma1 b) {
+        Forma1 nueva = new Forma1(new int[Punta.getF()][b.Punta.getC()]);
+        int i = 0;
+        int sum = 0;
+        Nodo p = Punta.getLiga();
+        while (i < Punta.getF()) {
+            int j = 0;
+            Nodo q = b.Punta.getLiga();
+            while (j < b.Punta.getC()) {
+                sum = fMasc(p, q);
+                if (sum != 0) {
+                    nueva.Insertar(i + "," + j + "," + sum);
+                }
+                q = q.getLiga();
+                j++;
+            }
+            p = p.getLiga();
+            i++;
+        }
+        this.Punta = nueva.Punta;
+    }
 
+    private int fMasc(Nodo cabezeraf, Nodo cabezerac) {
+        int sum = 0;
+        Nodo p = cabezeraf.getLf();
+        Nodo q = cabezerac.getLc();
+        while (p != cabezeraf && q != cabezerac) {
+            if (p.getC() == q.getF()) {
+                sum += p.getDato() * q.getDato();
+            }
+            if (p.getC() > q.getF()) {
+                q = q.getLc();
+            } else if (p.getC() < q.getF()) {
+                p = p.getLf();
+            } else {
+                p = p.getLf();
+                q = q.getLc();
+            }
+        }
+        return sum;
     }
 }

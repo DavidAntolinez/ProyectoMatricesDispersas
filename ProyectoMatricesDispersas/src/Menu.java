@@ -97,7 +97,7 @@ public class Menu {
                             T.Insertar();
                             break;
                         case 2:
-                            F1.Insertar();
+                            F1.Insertar("");
                             break;
                         case 3:
                             F2.Insertar();
