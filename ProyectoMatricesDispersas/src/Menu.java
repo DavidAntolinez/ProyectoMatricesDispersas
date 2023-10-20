@@ -100,7 +100,7 @@ public class Menu {
                             F1.Insertar("");
                             break;
                         case 3:
-                            F2.Insertar();
+                            F2.Insertar("");
                             break;
                         default:
                             break;

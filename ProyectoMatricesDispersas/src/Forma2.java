@@ -86,12 +86,15 @@ public class Forma2 {
 
             j++;
         }
+
     }
 
-    public void Insertar() {
-        System.out.println(
-                "ingrese primero las filas, luego las columnas, y por ultimo el dato, ejemplo: (1,2,3) uno es las filas, dos las columnas y 3 el dato");
-        String cadena = Basura.next();
+    public void Insertar(String cadena) {
+        if (cadena.isEmpty()) {
+            System.out.println(
+                    "ingrese primero las filas, luego las columnas, y por ultimo el dato, ejemplo: (1,2,3) uno es las filas, dos las columnas y 3 el dato");
+            cadena = Basura.next();
+        }
         String[] comp = cadena.split(",");
         int dato = Integer.parseInt(comp[2]);
         int c = Integer.parseInt(comp[1]);
@@ -99,47 +102,54 @@ public class Forma2 {
         boolean bandera = false;
         Nodo p = Punta;
         Nodo q = p.getLf();
-        while (q != p && !bandera) {
-            if (q.getF() == f && q.getC() == c) {
-                bandera = true;
-                System.out.println(
-                        "Se encontro un valor en esa posicion, ingrese 1 para reemplazarlo, o 2 para sumarlos");
-                int valor;
-                do {
-                    valor = Basura.nextInt();
-                    switch (valor) {
-                        case 1:
-                            q.setDato(dato);
-                            break;
-                        case 2:
-                            q.setDato(q.getDato() + dato);
-                            break;
-                        default:
-                            System.out.println("No seas idiota, coloca un 1 o 2, usuario de mierda");
-                            break;
-                    }
-                } while (valor != 1 && valor != 2);
-            }
+        if (f < Punta.getF() && c < Punta.getC()) {
+            while (q != p && !bandera) {
+                if (q.getF() == f && q.getC() == c) {
+                    bandera = true;
+                    System.out.println(
+                            "Se encontro un valor en esa posicion, ingrese 1 para reemplazarlo, o 2 para sumarlos");
+                    int valor;
+                    do {
+                        valor = Basura.nextInt();
+                        switch (valor) {
+                            case 1:
+                                q.setDato(dato);
+                                break;
+                            case 2:
+                                q.setDato(q.getDato() + dato);
+                                break;
+                            default:
+                                System.out.println("No seas idiota, coloca un 1 o 2, usuario de mierda");
+                                break;
+                        }
+                    } while (valor != 1 && valor != 2);
+                }
 
-            q = q.getLf();
-        }
-        // CASO EN EL CUAL NO EXISTE EL VALOR
-        if (!bandera) {
-            Nodo ñ = Punta, a;
-            p = Punta;
-            q = p.getLf();
-            a = ñ.getLc();
-            while (q != p && q.getLf().getF() < f) {
                 q = q.getLf();
             }
-            while (a != ñ && a.getLc().getC() < c) {
-                a = a.getLc();
+
+            if (!bandera) {
+                Nodo ñ = Punta, a;
+                p = Punta;
+                q = p.getLf();
+                a = ñ.getLc();
+
+                    while (q != p && q.getLf().getF() < f) {
+                        q = q.getLf();
+                    }
+                    while (a != ñ && a.getLc().getC() < c) {
+                        a = a.getLc();
+                    }
+                    Nodo x = new Nodo(f, c, dato);
+                    x.setLf(q.getLf());
+                    x.setLc(a.getLc());
+                    q.setLf(x);
+                    a.setLc(x);
+
+
+            } else {
+                System.out.println("No existe la posicion del dato a insertar en la matriz");
             }
-            Nodo x = new Nodo(f, c, dato);
-            x.setLf(q.getLf());
-            x.setLc(a.getLc());
-            q.setLf(x);
-            a.setLc(x);
         }
     }
 
@@ -275,7 +285,40 @@ public class Forma2 {
     }
 
     public void Multiplicar(Forma2 b) {
+        Forma2 nueva = new Forma2(new int[Punta.getF()][b.Punta.getC()]);
+        int i = 0;
+        Nodo p = Punta.getLc();
+        int sum = 0;
+        while (i < Punta.getF()) {
+            int j = 0;
+            Nodo q = b.Punta;
+            while (j < b.Punta.getC()) {
+                sum = fMasc(p, q, i, j);
+                if (sum != 0) {
+                    nueva.Insertar(i + "," + j + "," + sum);
+                }
+                j++;
+            }
+            i++;
+            p = p.getLc();
+        }
+        this.Punta = nueva.Punta;
+    }
 
+    private int fMasc(Nodo cabezeraf, Nodo cabezerac, int i, int j) {
+        int sum = 0;
+        Nodo p = cabezeraf;
+        Nodo q = cabezerac.getLc();
+        while (p != Punta && p.getF() <= i) {
+            while (q != cabezerac && q.getC() <= j) {
+                if (p.getC() == q.getF() && q.getC() == j && p.getF() == i) {
+                    sum += p.getDato() * q.getDato();
+                }
+                q = q.getLc();
+            }
+            p = p.getLf();
+        }
+        return sum;
     }
 
 }
