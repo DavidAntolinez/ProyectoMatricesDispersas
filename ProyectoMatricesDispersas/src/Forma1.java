@@ -216,7 +216,7 @@ public class Forma1 {
         int c = Integer.parseInt(comp[1]);
         int f = Integer.parseInt(comp[0]);
         boolean bandera = false;
-        if (f < Punta.getF() && c < Punta.getF()) {
+        if (f < Punta.getF() && c < Punta.getC()) {
             Nodo p = Punta.getLiga();
             while (p != Punta && !bandera) {
                 Nodo q = p.getLf();
